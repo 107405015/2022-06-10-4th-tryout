@@ -28,7 +28,9 @@
         }
 
         /*desktop*/
-        @media (min-width: 1024px) {
+        /*@media (min-width: 1024px) {*/
+        /* 用 768px 當作 breakpoint 比較適合，因為你們 mockup 就只有手機和桌機版而已 */
+        @media (min-width: 768px) {
 
 
             .only-for-desktop {
@@ -69,7 +71,8 @@
         .page-block {
             background-color: #FFFAF9;
             padding-bottom: 20px;
-            width: 1440px;
+            /* 移除寬度，因為使用者的瀏覽器可能超過 1440px */
+            /* width: 1440px; */
         }
 
         h1.about {
@@ -77,10 +80,14 @@
             width: 422px;
             color: #A98B73;
             font-size: 36px;
-            margin-right: 499px;
             padding-top: 74px;
-            margin-left: 499px;
             text-align: center;
+            /* margin-right: 499px; */
+            /* margin-left: 499px; */
+            /* 如果有給定 width，那我們可以透過以下方式讓 h1 置中，
+            不需要寫死 499px。若是寫死 499px，會因為瀏覽器寬度的不同而跑版 */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         h1.us {
@@ -88,10 +95,14 @@
             width: 422px;
             color: #FFFAF9;
             font-size: 36px;
-            margin-right: 499px;
             padding-top: 74px;
-            margin-left: 499px;
             text-align: center;
+            /* margin-right: 499px;
+            margin-left: 499px; */
+            /* 如果有給定 width，那我們可以透過以下方式讓 h1 置中，
+            不需要寫死 499px。若是寫死 499px，會因為瀏覽器寬度的不同而跑版 */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         p.news-intro {
@@ -108,9 +119,18 @@
             text-align: center;
         }
 
-        figure.pic img {
-            margin-left:auto;
+        /* 因為 figure 包住 img，所以要調整的是 figure，而非 img */
+        figure.pic {
+            /* 不確定 mockup 上圖片的寬度是多少，這邊 296px 是參考框框的大小 */
+            width: 296px;
+            /* margin-left margin-right 需要搭配 width 才會讓元素置中 */
+            margin-left: auto;
             margin-right: auto;
+        }
+            
+        figure.pic img {
+            /* 因為圖片的寬度由 figure.pic 定義了，img 只需要撐滿寬度就好 */
+            width: 100%;
         }
 
         div.name p {
@@ -130,6 +150,79 @@
             font-family: 'Noto Serif TC';
             font-size: 20px;
             color: #FFFAF9;
+        }
+
+        .nick-figure {
+            /* 設定寬度，以讓圖片可以置中 */
+            width: 318px;
+            /* 透過 margin-left, margin-right 置中 */
+            margin-left: auto;
+            margin-right: auto;
+
+            /* 讓照片成為色塊的參考點 */
+            position: relative;
+        }
+
+        .nick-figure img {
+            /* 讓圖撐滿區塊(318px) */
+            width: 100%;
+
+            /* 為了防止色塊壓在照片上面，z-index 搭配 position: relative 將照片擺在色塊前方 */
+            z-index: 1;
+            position: relative;
+        }
+
+        .nick-figure .nick-white-rectangle {
+            width: 296px;
+            height: 342px;
+            background-color: #FFFAF9;
+
+            /* 讓色塊的位置去參考照片的位置 */
+            position: absolute;
+            /* 距離照片左側 90px */
+            left: 90px;
+            /* 距離照片上面 -30px */
+            top: -30px;
+        }
+
+        .nick-figure .nick-brown-rectangle {
+            width: 160px;
+            height: 51px;
+            background-color: #6E5241;
+
+            /* 讓色塊的位置去參考照片的位置 */
+            position: absolute;
+            /* 距離照片左側 339px */
+            left: 330px;
+            /* 距離照片上面 172px */
+            top: 172px;
+        }
+
+        .nick-first-block {
+            margin-top: 103px;
+        }
+
+        .nick-center-text-block {
+            /* 將文字區塊置中 */
+            width: 541px;
+            margin-left: auto;
+            margin-right: auto;   
+
+            /* 文字顏色 */
+            color: #FFFAF9;
+
+            /* 將文字置中 */
+            text-align: center;
+        }
+
+        .nick-center-text-block h6 {
+            font-size: 32px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .nick-center-text-block p {
+            font-size: 20px;
         }
     }
     </style>
@@ -171,9 +264,8 @@
         <p class="news-intro">
             指南報社的文章選自其中四位學生的作品，想要藉著我們的視角，化身為派報員，帶你關心大學生們周遭的大小事！
         </p>
-        <div style="background-color:#A98B73;
-        width:1440px;
-        height:6000px;">
+        <!-- 移除 width 和 height 的設定，我們不用限制寬度是 1440px，我們只要確保該置中的元素都有置中就好，另外我們不需要設定 heigth，我們讓元素自動長高就好 -->
+        <div style="background-color:#A98B73;">
             <h1 class="us">
                 關於我們
             </h1>
@@ -183,9 +275,35 @@ height:2px;
 margin-right:auto;
 margin-left:auto;
 background-color: #FFFAF9;
-
 ">
             </div>
+
+            <!-- 
+                我試著寫個版本讓你們參考
+                
+                因為全部的照片都是置中的，
+                所以我們以照片為參考點，讓色塊根據照片來移動位置。
+                另外，大部分的文字也是置中的（除了立安的沒有置中），
+                所以我會先將文字區塊置中(width: 318px; margin-left: auto; margin-right: auto)，
+                接著再讓文字在區塊中置中（text-algin: center）
+            -->
+            <!-- 版型1：崴漢區塊 -->
+            <div class="nick-first-block">
+                <!-- 置中的照片-->
+                <figure class="nick-figure">
+                    <img src="./assets/we-han.jpg" />
+                    <!-- 白色色塊 -->
+                    <div class="nick-white-rectangle"></div>
+                    <!-- 棕色區塊-->
+                    <div class="nick-brown-rectangle"></div>
+                </figure>
+                <!-- 置中的文字區塊 -->
+                <div class="nick-center-text-block">
+                    <h6>王崴漢／</h6>
+                    <p>雖然對「小時候不讀書，長大當記者」這句話很反感，但我還真沒讀太多書。比起教科書裏的黃金屋，更喜歡書本外的真人真事，這樣的我熱衷採訪，喜歡做新聞。</p>
+                </div>
+            </div>
+
             <!--版型1-->
             <div>
                 <div style="
