@@ -108,9 +108,18 @@
             text-align: center;
         }
 
-        figure.pic img {
-            margin-left:auto;
+        /* 因為 figure 包住 img，所以要調整的是 figure，而非 img */
+        figure.pic {
+            /* 不確定 mockup 上圖片的寬度是多少，這邊 296px 是參考框框的大小 */
+            width: 296px;
+            /* margin-left margin-right 需要搭配 width 才會讓元素置中 */
+            margin-left: auto;
             margin-right: auto;
+        }
+            
+        figure.pic img {
+            /* 因為圖片的寬度由 figure.pic 定義了，img 只需要撐滿寬度就好 */
+            width: 100%;
         }
 
         div.name p {
